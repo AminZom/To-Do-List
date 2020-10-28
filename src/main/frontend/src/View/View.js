@@ -5,7 +5,7 @@ const view = ( props ) => {
     <div className = "View">
         <h4>Current Tasks:</h4>
         <p>{props.tasks}</p>
-        <button onClick={props.refresh()}>Refresh</button>
+        <button onClick={props.refresh}>Refresh</button>
     </div>
   );
 }

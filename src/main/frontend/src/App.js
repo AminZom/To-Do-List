@@ -22,16 +22,15 @@ class App extends Component {
       TaskDataService.retrieveAllTasks()
           .then(
               response => {
+                  let allTasks = []
                   if (response.data[0] !== undefined)
                   {
-                    let allTasks = []
                     for(let taskNum in response.data)
                     {
                       allTasks.push(response.data[taskNum].taskName);
                     }
-                    this.setState({ tasks: allTasks })
                   }
-                    
+                  this.setState({ tasks: allTasks })
               }
           )
   }
