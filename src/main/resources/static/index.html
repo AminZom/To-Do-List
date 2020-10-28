@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>To-Do List</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+    <form action="/add" method="POST">
+        <p>Let's add a task.</p>
+
+        <div>
+            <label for="taskName">First name:</label>
+            <input name="taskName" id="taskName" value="Laundry">
+        </div>
+        <div>
+            <label for="description">Last name:</label>
+            <input name="description" id="description" value="Do the laundry.">
+        </div>
+        <div>
+            <button>Add task</button>
+        </div>
+    </form>
+
+
+
+    <form action="/list" method="GET">
+        <button>List tasks</button>
+    </form>
+    </body>
+</html>
