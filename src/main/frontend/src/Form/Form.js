@@ -2,12 +2,19 @@ import React from 'react';
 
 const form = ( props ) => {
   return (
-    <div className = "Form">
-        <h4>Enter the task name:</h4>
-        <input type="text" id="taskName" placeholder="Ex. Laundry"/>
-        <h4>Enter the description:</h4>
-        <input type="text" id="description" placeholder="Ex. Do the laundry."/>
-    </div>
+    <form onSubmit={props.submitTask}>
+        <label>
+            Enter the task name:
+            <input type="text" placeholder="Ex. Laundry" onChange={props.nameChanged}/>
+        </label>
+        <br></br>
+        <label>
+            Enter the description:
+            <input type="text" placeholder="Ex. Do the laundry." onChange={props.descChanged}/>
+        </label>
+        <br></br>
+        <button type="submit">Add Task</button>
+    </form>
   );
 }
 

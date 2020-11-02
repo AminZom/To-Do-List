@@ -6,7 +6,9 @@ import TaskDataService from './service/TaskDataService';
 
 class App extends Component {
   state = {
-    tasks: []
+    tasks: [],
+    newTaskName: "",
+    newTaskDescription: ""
   }
 
   constructor(props) {
@@ -35,6 +37,24 @@ class App extends Component {
           )
   }
 
+  taskNameChangeHandler = (event) => {
+    this.setState({ newTaskName: event.target.value });
+  }
+
+  taskDescChangeHandler = (event) => {
+    this.setState({ newTaskDescription: event.target.value });
+  }
+
+  addTask = (event) => {
+    event.preventDefault()
+    TaskDataService.addNewTask(this.state.newTaskName, this.state.newTaskDescription)
+          .then(
+              response => {
+                  console.log(response)
+              }
+          )
+  }
+
   inputChangedHandler = (event) => {
     this.setState({
       tasks: event.target.value
@@ -45,7 +65,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>To-Do List</h1>
-        <Form changed={this.inputChangedHandler}/>
+        <Form submitTask = {this.addTask} nameChanged={this.taskNameChangeHandler} descChanged={this.taskDescChangeHandler}/>
         <View refresh={this.refreshTasks} tasks={this.state.tasks.join(", ")}/>
       </div>
     );
