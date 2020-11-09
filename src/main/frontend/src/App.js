@@ -50,7 +50,7 @@ class App extends Component {
     TaskDataService.addNewTask(this.state.newTaskName, this.state.newTaskDescription)
           .then(
               response => {
-                  console.log(response)
+                  //console.log(response)
               }
           )
   }

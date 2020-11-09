@@ -11,11 +11,11 @@ public class DemoController {
     private TaskRepository taskRepository;
 
     @PostMapping("/add")
-    public String addTask(@RequestParam String taskName, @RequestParam String description) {
-        Task task = new Task();
-        task.setTaskName(taskName);
-        task.setDescription(description);
-        taskRepository.save(task);
+    public String addTask(@RequestBody Task task) {
+        Task newTask = new Task();
+        newTask.setTaskName(task.getTaskName());
+        newTask.setDescription(task.getDescription());
+        taskRepository.save(newTask);
         return "Added new task to repo!";
     }
 

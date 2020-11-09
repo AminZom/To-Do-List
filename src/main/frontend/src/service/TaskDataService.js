@@ -13,7 +13,11 @@ class TaskDataService {
     }
 
     addNewTask(name, description) {
-        return axios.post(`${TASK_API_URL}/add`, { name, description })
+        let task = {
+            taskName: name,
+            description: description
+        };
+        return axios.post(`${TASK_API_URL}/add`, task)
     }
 }
 
