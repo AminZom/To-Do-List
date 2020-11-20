@@ -24,7 +24,7 @@ class App extends Component {
       TaskDataService.retrieveAllTasks()
           .then(
               response => {
-                  let allTasks = []
+                  let allTasks = [];
                   if (response.data[0] !== undefined)
                   {
                     for(let taskNum in response.data)
@@ -32,7 +32,7 @@ class App extends Component {
                       allTasks.push(response.data[taskNum].taskName);
                     }
                   }
-                  this.setState({ tasks: allTasks })
+                  this.setState({ tasks: allTasks });
               }
           )
   }
@@ -66,7 +66,7 @@ class App extends Component {
       <div className="App">
         <h1>To-Do List</h1>
         <Form submitTask = {this.addTask} nameChanged={this.taskNameChangeHandler} descChanged={this.taskDescChangeHandler}/>
-        <View refresh={this.refreshTasks} tasks={this.state.tasks.join(", ")}/>
+        <View refresh={this.refreshTasks} tasks={JSON.stringify(this.state.tasks)}/>
       </div>
     );
   }
