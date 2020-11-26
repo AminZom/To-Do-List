@@ -19,6 +19,14 @@ class TaskDataService {
         };
         return axios.post(`${TASK_API_URL}/add`, task)
     }
+    deleteTask(name, description) {
+        let task = {
+            taskName: name,
+            description: description
+        };
+        console.log(task)
+        return axios.post(`${TASK_API_URL}/delete`, task)
+    }
 }
 
 export default new TaskDataService()

@@ -29,7 +29,10 @@ class App extends Component {
                   {
                     for(let taskNum in response.data)
                     {
-                      allTasks.push(response.data[taskNum].taskName);
+                      let taskName = response.data[taskNum].taskName
+                      let description = response.data[taskNum].description
+                      let newTask = [taskName, description]
+                      allTasks.push(newTask);
                     }
                   }
                   this.setState({ tasks: allTasks });
@@ -50,15 +53,18 @@ class App extends Component {
     TaskDataService.addNewTask(this.state.newTaskName, this.state.newTaskDescription)
           .then(
               response => {
-                  //console.log(response)
+                this.refreshTasks();
               }
           )
   }
 
-  inputChangedHandler = (event) => {
-    this.setState({
-      tasks: event.target.value
-    })
+  deleteTask = (task) => {
+    TaskDataService.deleteTask(task[0], task[1])
+          .then(
+              response => {
+                this.refreshTasks();
+              }
+          )
   }
 
   render() {
@@ -66,7 +72,7 @@ class App extends Component {
       <div className="App">
         <h1>To-Do List</h1>
         <Form submitTask = {this.addTask} nameChanged={this.taskNameChangeHandler} descChanged={this.taskDescChangeHandler}/>
-        <View refresh={this.refreshTasks} tasks={JSON.stringify(this.state.tasks)}/>
+        <View refresh={this.refreshTasks} tasks={JSON.stringify(this.state.tasks)} deleteTask={this.deleteTask}/>
       </div>
     );
   }

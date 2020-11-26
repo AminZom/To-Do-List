@@ -18,6 +18,18 @@ public class DemoController {
         taskRepository.save(newTask);
         return "Added new task to repo!";
     }
+    
+    @PostMapping("/delete")
+    public String deleteTask(@RequestBody Task task) {
+    	for(Task taskCheck : taskRepository.findAll())
+    	{
+    		if(taskCheck.getTaskName().equals(task.getTaskName()) && taskCheck.getDescription().equals(task.getDescription()))
+    		{
+    			taskRepository.delete(taskCheck);
+    		}
+    	}
+        return "Deleted task from repo!";
+    }
 
     @GetMapping("/list")
     public Iterable<Task> getTasks() {
