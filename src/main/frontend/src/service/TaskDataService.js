@@ -15,7 +15,7 @@ class TaskDataService {
     addNewTask(name, description) {
         let task = {
             taskName: name,
-            description: description
+            description: description,
         };
         return axios.post(`${TASK_API_URL}/add`, task)
     }
@@ -24,8 +24,15 @@ class TaskDataService {
             taskName: name,
             description: description
         };
-        console.log(task)
         return axios.post(`${TASK_API_URL}/delete`, task)
+    }
+    completeTask(name, description, isComplete) {
+        let task = {
+            taskName: name,
+            description: description,
+            isComplete: !isComplete
+        };
+        return axios.post(`${TASK_API_URL}/complete`, task)
     }
 }
 

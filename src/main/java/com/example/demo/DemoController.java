@@ -15,6 +15,7 @@ public class DemoController {
         Task newTask = new Task();
         newTask.setTaskName(task.getTaskName());
         newTask.setDescription(task.getDescription());
+        newTask.setCompleted(false);
         taskRepository.save(newTask);
         return "Added new task to repo!";
     }
@@ -29,6 +30,22 @@ public class DemoController {
     		}
     	}
         return "Deleted task from repo!";
+    }
+    
+    @PostMapping("/complete")
+    public String completeTask(@RequestBody Task task) {
+    	System.out.println(task.getTaskName());
+    	System.out.println(task.getDescription());
+    	System.out.println(task.getCompleted());
+    	for(Task taskCheck : taskRepository.findAll())
+    	{
+    		if(taskCheck.getTaskName().equals(task.getTaskName()) && taskCheck.getDescription().equals(task.getDescription()))
+    		{
+    			taskCheck.setCompleted(!taskCheck.getCompleted());
+    			taskRepository.save(taskCheck);
+    		}
+    	}
+        return "Completed task!";
     }
 
     @GetMapping("/list")

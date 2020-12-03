@@ -8,7 +8,7 @@ class App extends Component {
   state = {
     tasks: [],
     newTaskName: "",
-    newTaskDescription: ""
+    newTaskDescription: "",
   }
 
   constructor(props) {
@@ -31,7 +31,8 @@ class App extends Component {
                     {
                       let taskName = response.data[taskNum].taskName
                       let description = response.data[taskNum].description
-                      let newTask = [taskName, description]
+                      let completed = response.data[taskNum].completed
+                      let newTask = [taskName, description, completed]
                       allTasks.push(newTask);
                     }
                   }
@@ -67,12 +68,21 @@ class App extends Component {
           )
   }
 
+  taskCompleted = (task) => {
+    TaskDataService.completeTask(task[0], task[1], task[2])
+          .then(
+              response => {
+                this.refreshTasks();
+              }
+          )
+  }
+
   render() {
     return (
       <div className="App">
         <h1>To-Do List</h1>
         <Form submitTask = {this.addTask} nameChanged={this.taskNameChangeHandler} descChanged={this.taskDescChangeHandler}/>
-        <View refresh={this.refreshTasks} tasks={JSON.stringify(this.state.tasks)} deleteTask={this.deleteTask}/>
+        <View refresh={this.refreshTasks} tasks={JSON.stringify(this.state.tasks)} deleteTask={this.deleteTask} taskCompleted={this.taskCompleted}/>
       </div>
     );
   }
